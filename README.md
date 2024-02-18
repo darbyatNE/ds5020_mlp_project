@@ -1,5 +1,5 @@
 # Team: Justine Cyr, Ben Darby, Ryan Webb
-# DS5020, Spring  
+# DS5020, Spring 2024
 # Professor: W Viles
 
 # Project Topic: Multilayer Perceptron / Neural Network
