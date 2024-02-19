@@ -14,3 +14,6 @@
   blah, blah, blah...
 
   [Project Paper](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
+
+# Bibliography
+   [MLP Source #1](https://darbyatne.github.io/Multilayer_perceptron_and_neural_networks.pdf)
