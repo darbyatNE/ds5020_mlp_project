@@ -10,7 +10,7 @@ __Professor: W Viles__<br>
 
 * This project is provided to showcase a method designed for classification, recognition, prediction and approximation.
 
-* To get started with regression type "make plot" in the command line
+* To get started with regression type "make regression" in the command line
 
 * Repo Directories:    
     - data: contains the data files for the regression/mlp models

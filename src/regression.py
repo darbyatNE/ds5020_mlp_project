@@ -46,6 +46,10 @@ y = dat[:,1]
 b0,b1 = slr(y,x)
 plt.plot(x,y,'k.')    
 plt.plot(x,b0+b1*x,color='blue',linewidth=3)
+plt.legend()
+plt.title("Simple Linear Regresssion")
+plt.xlabel("Mother's Height")
+plt.ylabel("Daughter's Height")
 plt.show()
 ###
 
