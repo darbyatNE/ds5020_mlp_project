@@ -17,10 +17,10 @@ def gs(Ain):
 m = 5
 n = 3
 A = np.round(np.random.normal(0,1,[m,n]),3)
-print(A)
+#print(A)
 
 Z = gs(A)
-print(Z)
+#print(Z)
 np.matmul(np.transpose(Z),Z)
 
 ### Code in this section performs and plots Simple Linear Regression
@@ -37,7 +37,7 @@ def slr(y,x):
     beta = r*sy/sx
     return ybar-beta*xbar,beta
 
-dat = pd.read_csv("data/lin_reg_data/HousingData.csv")
+dat = pd.read_csv("data/lin_reg_data/Heights.csv")
 colnames = dat.columns
 dat = dat.to_numpy()
 x = dat[:,0]

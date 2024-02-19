@@ -1,6 +1,6 @@
-# Team: Justine Cyr, Ben Darby, Ryan Webb
-# DS5020, Spring 2024
-# Professor: W Viles
+__Team: Justine Cyr, Ben Darby, Ryan Webb__<br>
+__DS5020, Spring 2024__<br>
+__Professor: W Viles__<br>
 # Project Topic: Multilayer Perceptron / Neural Network
 
 * This project will  demonstrate the implementation of a Multi Layer Perceptron (MLP). 
