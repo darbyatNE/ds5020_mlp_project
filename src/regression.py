@@ -37,7 +37,7 @@ def slr(y,x):
     beta = r*sy/sx
     return ybar-beta*xbar,beta
 
-dat = pd.read_csv("data/data.csv")
+dat = pd.read_csv("data/lin_reg_data/HousingData.csv")
 colnames = dat.columns
 dat = dat.to_numpy()
 x = dat[:,0]
@@ -52,19 +52,19 @@ plt.show()
 
 ### Code in this section will demonstrate Multiple Linear Regression
 
-def mlr(y,X,intercept=True):
-    n,p = np.shape(X)
-    if intercept and not np.all(X[:,0]==1):
-        X = np.column_stack((np.ones(n),X))
-    Xt = np.transpose(X)
-    XtX = np.matmul(Xt,X)
-    XtXinv = np.linalg.inv(XtX)
-    Xty = np.matmul(Xt,y)
-    return np.matmul(XtXinv,Xty)
+# def mlr(y,X,intercept=True):
+#     n,p = np.shape(X)
+#     if intercept and not np.all(X[:,0]==1):
+#         X = np.column_stack((np.ones(n),X))
+#     Xt = np.transpose(X)
+#     XtX = np.matmul(Xt,X)
+#     XtXinv = np.linalg.inv(XtX)
+#     Xty = np.matmul(Xt,y)
+#     return np.matmul(XtXinv,Xty)
 
-import sklearn.datasets as data
-X,y = data.load_diabetes(return_X_y=True)
-betahat = mlr(y,X)
+# import sklearn.datasets as data
+# X,y = data.load_diabetes(return_X_y=True)
+# betahat = mlr(y,X)
 
 ###
 
