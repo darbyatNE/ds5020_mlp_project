@@ -16,4 +16,6 @@
   [Project Paper](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
 
 # Bibliography
-   [MLP Source #1](https://darbyatne.github.io/Multilayer_perceptron_and_neural_networks.pdf)
+   [Multilayer Perceptron and Neural Networks](https://darbyatne.github.io/Multilayer_perceptron_and_neural_networks.pdf)
+
+   [Introduction to Artificial Neural Networks](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=04d0b6952a4f0c7203577afc9476c2fcab2cba06)
