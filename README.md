@@ -18,4 +18,4 @@
 # Bibliography
    [Multilayer Perceptron and Neural Networks](https://darbyatne.github.io/Multilayer_perceptron_and_neural_networks.pdf)
 
-   [Introduction to Artificial Neural Networks](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=04d0b6952a4f0c7203577afc9476c2fcab2cba06)
+   [Introduction to Artificial Neural Networks](https://www.ijeit.com/vol%202/Issue%201/IJEIT1412201207_36.pdf)
