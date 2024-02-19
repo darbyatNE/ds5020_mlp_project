@@ -12,3 +12,5 @@
   In this repo you will find the code and sources used to 
   
   blah, blah, blah...
+
+  [Project Paper](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
