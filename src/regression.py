@@ -70,9 +70,9 @@ import sklearn.datasets as data
 X,y = data.load_diabetes(return_X_y=True)
 betahat = mlr(y,X)
 
-### Multiple Linear Regression on our data
+### Multiple Linear Regression on Water Potability Data
 
-water_data = pd.read_csv('water_potability.csv')
+water_data = pd.read_csv('https://github.com/darbyatNE/ds5020_mlp_project/blob/main/data/mlp_data/water_potability.csv')
 water_df = water_data.dropna()
 # Convert the dataframe to dictionary of key:arrays
 data = []
