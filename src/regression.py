@@ -70,6 +70,21 @@ import sklearn.datasets as data
 X,y = data.load_diabetes(return_X_y=True)
 betahat = mlr(y,X)
 
+### Multiple Linear Regression on our data
+
+water_data = pd.read_csv('water_potability.csv')
+water_df = water_data.dropna()
+# Convert the dataframe to dictionary of key:arrays
+data = []
+target = water_df['Potability'].values
+for _, row in water_df.iterrows():
+    data_row = [row[col] for col in water_df.columns[:-1]]
+    data.append(data_row)
+# Convert data list to array
+data_arr = np.array(data)
+# Run mlr on data
+water_betahat = mlr(target,data_arr)
+
 ###
 
 ### Code in this section will demostrate a multilayer perceptron
