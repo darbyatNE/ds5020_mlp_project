@@ -3,6 +3,8 @@ __DS5020, Spring 2024__<br>
 __Professor: W Viles__<br>
 ### Semester Project Paper
 [An Overview of ANN/MLP: Analyzing Water Potability Data](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
+
+[Check out our MLP Tutorial Here](https://docs.google.com/document/d/1bF4Kb_jRjQWHoXGLLgkLGoO-WSYhhsguDwRlOtZXv1I/edit?usp=sharing)
 # Project Topic: Multilayer Perceptron / Neural Network
 
 * This project will  demonstrate the implementation of a Multi Layer Perceptron (MLP). 
