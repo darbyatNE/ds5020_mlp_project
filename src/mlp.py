@@ -29,7 +29,7 @@ missing_values = np.isnan(data).sum(axis=0)
 X = data[:, :-1]  # All rows, all columns except the last column
 
 # define target
-target_column = 'Potability' 
+# target_column = 'Potability' 
 
 # split data by characteristics and target
 y = data[:,-1]  # All rows, only the last column
