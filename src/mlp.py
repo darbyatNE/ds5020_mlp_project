@@ -1,10 +1,7 @@
-# import dependencies
-import numpy as np
-import pandas as pd
-from sklearn import datasets
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+import numpy as np  # Line 1: Import NumPy library as np
+from sklearn import datasets  # Line 2: Import datasets module from scikit-learn library
+import matplotlib.pyplot as plt  # Line 3: Import pyplot module from matplotlib library
+from sklearn.preprocessing import StandardScaler  # Line 4: Import StandardScaler class from scikit-learn
 
 
 # Load the CSV file into a NumPy array
@@ -37,109 +34,56 @@ y = data[:,-1]  # All rows, only the last column
 scaler = StandardScaler()
 X = scaler.fit(X).transform(X)
 
-# preprocessing data check 
-# check for zero mean and unit variance
-np.mean(X,0)
-np.var(X,0)
+# Check for zero mean and unit variance
+print('Checking mean of scaled features (Value should be near 0): ', np.mean(X, 0))  # Line 9: Compute mean of each feature in scaled feature matrix X
+print('Checking variance of scaled features (Value should equal 1): ', np.var(X, 0))   # Line 10: Compute variance of each feature in scaled feature matrix X
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+def MLP(y, X, m=10, gam=0.1, T=1e4):  # Line 11: Define MLP function with parameters
+    n, p = np.shape(X)  # Line 12: Get number of samples (n) and number of features (p) in X
+    beta0 = 0  # Line 13: Initialize bias term beta0
+    vbeta = np.zeros(m)  # Line 14: Initialize weight vector vbeta
+    valp0 = np.zeros(m)  # Line 15: Initialize intermediate variable valp0
+    A = np.zeros((m, p))  # Line 16: Initialize weight matrix A
 
-# defines the MLP function with parameters y, X, m, gam & T
-# y is the target variable array
-# X contains all of the input features from the dataset
-# m holds the number of neurons in hidden layer
-# gam is a hyperparameter which holds the learning rate
-# T is a hyperparameter which holds the number of epochs to run the model
-def MLP(y,X,m=9,gam=.1,T=5e3):
-    # defines the number of samples (n) and the number of features (p) in the dataset
-    n, p = np.shape(X) 
-    # beta0 is the bias term
-    beta0 = 0
-    # vbeta is the weighting vector
-    vbeta = np.zeros(m)
-    # valp0 is the hidden layer value array
-    valp0 = np.zeros(m)
-    # init weight matrix A with params m and p
-    # p holds the number of features in the dataset, typically this matches the 
-    #	 number of neurons in the input layer
-    A = np.zeros((m,p))
-    # defines the sigmoid activation function
-    def phi(z):
-        return 1/(1+np.exp(-z))
-    # initializes the training loop iteration count
-    t = 0
-    # initializes the mean error array of all epochs(T)
-    err = np.zeros(int(T))
-    
-    # Gradient Descent Process: implemented to optimize the parameters (beta0, vbeta, valp0, and A) 
-    while t<T-1:
-        t += 1
-        # selects one index from n possible samples
-        ix = np.random.choice(n,1)
-        # performs a matrix multiplication of input features with the weight matrix
-        vh = phi(valp0+np.matmul(A,X[ix].flatten()))
-        # yhat holds the predicted output
-        yhat = phi(beta0+np.dot(vbeta,vh))
-        # error (E) between the predicted output (yhat) and the target label (y[ix]) 
-        E = yhat-y[ix]
-        #E = (yhat - y[ix]) * np.ones_like(vbeta)        
-        # updates the bias term
-        beta0 = beta0-gam*E
-        # holds temp value for weight update
-        temp = vbeta*vh*(1-vh)
-        # updates the weight vector
-        vbeta = vbeta-gam*E*vh
-        # updates the hidden layer neuron values
-        valp0 = valp0-gam*E*temp
-        # updates the weight matrix
-        A = A-gam*E*np.outer(temp,X[ix].flatten())
-        # compute mean error: Ei=ŷi-yi
-        for i in range(n):
-            # calculate individual neuron activations in the hidden layer
-            vh = phi(valp0+np.matmul(A,X[i]))
-            # calculates the output predictions
-            yhat = phi(beta0+np.dot(vbeta,vh))
-            # calculates the absolute error/mean for each sample (water source)
-            err[t] += np.abs(yhat-y[i])
-            err[t] = err[t]/n
-            # Print epoch number and total error
-            print(f"Epoch {t}: Total Error = {err[t]:.6f}")
-    
-    # Plot the error curve
-    plt.figure(figsize=(8, 6))  # Set the size of the figure
-    plt.plot(err[1:t])
-    plt.xlabel('Epochs')
-    plt.ylabel('Total Error')
-    plt.title('Error Curve over Epochs')
-    plt.tight_layout()  # Adjust layout to prevent clipping of labels
-    plt.savefig('fig/error_curve.png')  # Save the plot as a PNG file in the fig directory
+    def phi(z):  # Line 17: Define sigmoid activation function phi
+        return 1 / (1 + np.exp(-z))  # Line 18: Sigmoid activation function definition
 
-         
-    # Function to predict labels
-    def predict(beta0, vbeta, valp0, A, X):
-        vh = phi(valp0[:, np.newaxis] + np.matmul(A, X.T))
-        yhat = phi(beta0 + np.dot(vbeta, vh))
-        return yhat
+    t = 0  # Line 19: Initialize iteration counter t
+    err = np.zeros(int(T))  # Line 20: Initialize array to store errors during training
+    while t < T-1:  # Line 21: Start main training loop
+        t += 1  # Line 22: Increment iteration counter
+        # Sample a random index (data point)
+        ix = np.random.choice(n, 1)  # Line 24: Randomly select a data point index
+        # Forward part of back propagation
+        vh = phi(valp0 + np.matmul(A, X[ix].flatten()))  # Line 26: Compute hidden layer activations
+        yhat = phi(beta0 + np.dot(vbeta, vh))  # Line 27: Compute output prediction
+        # Update parameters
+        E = yhat - y[ix]  # Line 29: Compute error
+        beta0 = beta0 - gam * E  # Line 30: Update bias term
+        temp = vbeta * vh * (1 - vh)  # Line 31: Compute temporary variable for weight update
+        vbeta = vbeta - gam * E * vh  # Line 32: Update weight vector
+        valp0 = valp0 - gam * E * temp  # Line 33: Update intermediate variable
+        A = A - gam * E * np.outer(temp, X[ix].flatten())  # Line 34: Update weight matrix
 
-    # Make predictions on training and test data
-    y_train_pred = predict(beta0, vbeta, valp0, A, X_train)
-    y_test_pred = predict(beta0, vbeta, valp0, A, X_test)
+        # Compute mean error
+        for i in range(n):  # Line 36: Iterate over all data points
+            vh = phi(valp0 + np.matmul(A, X[i]))  # Line 37: Compute hidden layer activations for each data point
+            yhat = phi(beta0 + np.dot(vbeta, vh))  # Line 38: Compute output predictions
+            err[t] += np.sum(np.abs(yhat - y[i]))  # Line 39: Compute absolute error
+        err[t] = err[t] / n  # Line 40: Compute mean error for the iteration
+        # if np.mod(t, 100) == 0:  # Line 41: Plot error curve every 100 iterations
+        # err_plot(0) =err[t] 
+    return beta0, vbeta, valp0, A, err  # Line 44: Return learned parameters after training
 
-    # Calculate accuracy
-    def calculate_accuracy(y_true, y_pred):
-        correct = (y_true == np.round(y_pred)).sum()
-        total = len(y_true)
-        accuracy = correct / total
-        return accuracy
+beta0, vbeta, valp0, A, err = MLP(y, X, m=10, gam=0.005, T=600)
+# Plot the error curve
+plt.figure(figsize=(8, 6))  # Set the size of the figure
+plt.plot(err[1:])
+plt.xlabel('Iteraction')
+plt.ylabel('Total Error')
+plt.title('Error Curve over # of Iterations')
+plt.tight_layout()  # Adjust layout to prevent clipping of labels
+filename = 'fig/mlp_error_curve.png'
+plt.savefig(filename)  # Save the plot as a PNG file in the fig directory
+print('Plot of the error curve was saved to ', filename)
 
-    # Report accuracy
-    train_accuracy = calculate_accuracy(y_train, y_train_pred)
-    test_accuracy = calculate_accuracy(y_test, y_test_pred)         
-    return train_accuracy, test_accuracy
-
-   
-# Call the MLP function
-train_accuracy, test_accuracy= MLP(y, X, m=6, gam=0.05, T=160)
-print("Training Accuracy:", train_accuracy)
-print("Test Accuracy:", test_accuracy)  

@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
 def logistic_gd (y ,X , alp =0.1 , eps =1e-4):
@@ -25,13 +26,14 @@ def logistic_gd (y ,X , alp =0.1 , eps =1e-4):
 def logistic_newton(y, X, alpha=0.1, eps=1e-4):
     def logistic(z):
         return np.exp(z) / (1 + np.exp(z))  
-
+    
     n, p = np.shape(X)
     if not np.all(X[:, 0] == 1):
         X = np.column_stack((np.ones(n), X))
     Xt = np.transpose(X)
     vbeta = np.random.normal(0, 1, p + 1)
     vbeta0 = vbeta + 1
+    vbeta_history = []  # List to store the changes in vbeta values
     while np.max(np.abs(vbeta - vbeta0)) > eps:
         vbeta0 = vbeta
         linpred = np.matmul(X, vbeta)
@@ -40,7 +42,22 @@ def logistic_newton(y, X, alpha=0.1, eps=1e-4):
         grad = np.matmul(Xt, yhat - y)
         H = np.matmul(np.matmul(Xt, np.diag(np.multiply(yhat, 1 - yhat))), X)
         Hinv = np.linalg.inv(H)
-        vbeta = vbeta - alpha * np.matmul(Hinv, grad)  # Adjusted update with learning rate
+        delta_vbeta = alpha * np.matmul(Hinv, grad)  # Change in vbeta for this iteration
+        vbeta = vbeta - delta_vbeta  # Update vbeta
+        vbeta_history.append(np.sum(delta_vbeta))  # Append the change in vbeta to history
+    
+    # Convert vbeta_history to numpy array for plotting
+    vbeta_history = np.array(vbeta_history)
+    
+    # Plot and save vbeta history
+    plt.plot(vbeta_history)
+    plt.xlabel('Iteration')
+    plt.ylabel('Change in vbeta')
+    plt.title('Change in vbeta vs. Iteration')
+    filename = 'fig/vbeta_change_plot.png'
+    plt.savefig(filename)
+    plt.show()
+    print('A chart showing the change in vbeta through the iterations of the model has been saved to ', filename)
     return vbeta, yhat
 
 
@@ -74,6 +91,8 @@ vbeta, yhat = logistic_gd (y ,X , alp =0.1 ,eps=1e-4)
 print(f'vhat: {yhat}')
 print(f'vbeta: {vbeta}')
 
-vbeta, yhat = logistic_newton(y ,X , alpha=0.02, eps=2e-3)
+vbeta, yhat = logistic_newton(y ,X , alpha=0.016, eps=4e-4)
+print('Listed below are the final parameter values:/n')
 print(f'vhat: {yhat}')
 print(f'vbeta: {vbeta}')
+#perfect
