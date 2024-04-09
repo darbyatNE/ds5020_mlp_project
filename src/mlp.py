@@ -79,7 +79,7 @@ beta0, vbeta, valp0, A, err = MLP(y, X, m=10, gam=0.005, T=600)
 # Plot the error curve
 plt.figure(figsize=(8, 6))  # Set the size of the figure
 plt.plot(err[1:])
-plt.xlabel('Iteraction')
+plt.xlabel('Iteration')
 plt.ylabel('Total Error')
 plt.title('Error Curve over # of Iterations')
 plt.tight_layout()  # Adjust layout to prevent clipping of labels
