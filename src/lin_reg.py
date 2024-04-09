@@ -50,8 +50,10 @@ plt.legend()
 plt.title("Simple Linear Regresssion")
 plt.xlabel("Mother's Height")
 plt.ylabel("Daughter's Height")
-plt.show()
-###
+filename = 'figs/mother_daughter_heights.png'
+plt.savefig(filename)
+print('A chart showing the linear relationship of the daughter\'s height to their mother\'s \
+    height as set by the linear regression model has been saved to', filename)
 
 
 ### Code in this section will demonstrate Multiple Linear Regression
@@ -70,10 +72,3 @@ import sklearn.datasets as data
 X,y = data.load_diabetes(return_X_y=True)
 betahat = mlr(y,X)
 
-###
-
-### Code in this section will demostrate a multilayer perceptron
-'''
-MLP Code goes in here :)
-'''
-###

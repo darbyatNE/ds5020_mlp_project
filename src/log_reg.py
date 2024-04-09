@@ -29,7 +29,7 @@ def logistic_gd(y, X, alp=0.1, eps=1e-4):
     plt.xlabel('Iteration')
     plt.ylabel('Change in vbeta')
     plt.title('Change in vbeta vs. Iteration in the logistic regression gradient descent model')
-    filename = 'fig/log_grad_dec_vbeta_change_plot.png'
+    filename = 'figs/log_grad_dec_vbeta_change_plot.png'
     plt.savefig(filename)
     plt.show()
     print('A chart showing the change in vbeta through the iterations of the model has been saved to', filename)
@@ -66,7 +66,7 @@ def logistic_newton(y, X, alpha=0.1, eps=1e-4):
     plt.xlabel('Iteration')
     plt.ylabel('Change in vbeta')
     plt.title('Change in vbeta vs. Iteration')
-    filename = 'fig/log_newton_vbeta_change_plot.png'
+    filename = 'figs/log_newton_vbeta_change_plot.png'
     plt.savefig(filename)
     plt.show()
     print('A chart showing the change in vbeta through the iterations of the model has been saved to', filename)

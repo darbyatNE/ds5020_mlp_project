@@ -83,7 +83,7 @@ plt.xlabel('Iteration')
 plt.ylabel('Total Error')
 plt.title('Error Curve over # of Iterations')
 plt.tight_layout()  # Adjust layout to prevent clipping of labels
-filename = 'fig/mlp_error_curve.png'
+filename = 'figs/mlp_error_curve.png'
 plt.savefig(filename)  # Save the plot as a PNG file in the fig directory
 print('Plot of the error curve was saved to ', filename)
 
