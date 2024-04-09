@@ -28,7 +28,7 @@ def logistic_gd(y, X, alp=0.1, eps=1e-4):
     plt.plot(vbeta_history)
     plt.xlabel('Iteration')
     plt.ylabel('Change in vbeta')
-    plt.title('Change in vbeta vs. Iteration in the logistic regression gradient descent model')
+    plt.title('Change in vbeta vs. iteration in the logistic reg. gradient descent model')
     filename = 'figs/log_grad_dec_vbeta_change_plot.png'
     plt.savefig(filename)
     plt.show()
@@ -65,7 +65,7 @@ def logistic_newton(y, X, alpha=0.1, eps=1e-4):
     plt.plot(vbeta_history)
     plt.xlabel('Iteration')
     plt.ylabel('Change in vbeta')
-    plt.title('Change in vbeta vs. Iteration')
+    plt.title('Change in vbeta vs. iteration in the logistic regression Newton model')
     filename = 'figs/log_newton_vbeta_change_plot.png'
     plt.savefig(filename)
     plt.show()
@@ -112,7 +112,7 @@ plt.clf()  # Clear the current figure
 
 #Load dataset and execute logistic regression Newton model 
 X, y = load_dataset()
-vbeta, yhat = logistic_newton(y ,X , alpha=0.02, eps=2e-4)
+vbeta, yhat = logistic_newton(y ,X , alpha=0.018, eps=6e-4)
 print('Listed below are the final parameter values:/n')
 print(f'vhat: {yhat}')
 print(f'vbeta: {vbeta}')

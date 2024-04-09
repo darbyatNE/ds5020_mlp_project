@@ -45,12 +45,12 @@ y = dat[:,1]
 
 b0,b1 = slr(y,x)
 plt.plot(x,y,'k.')    
-plt.plot(x,b0+b1*x,color='blue',linewidth=3)
+plt.plot(x,b0+b1*x,color='blue',linewidth=3, label='Linear Regression Best Fit Line')
 plt.legend()
 plt.title("Simple Linear Regresssion")
 plt.xlabel("Mother's Height")
 plt.ylabel("Daughter's Height")
-filename = 'figs/mother_daughter_heights.png'
+filename = 'figs/lin_reg_mother_daughter_heights.png'
 plt.savefig(filename)
 print('A chart showing the linear relationship of the daughter\'s height to their mother\'s \
     height as set by the linear regression model has been saved to', filename)
