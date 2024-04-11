@@ -3,10 +3,10 @@ __DS5020, Spring 2024__<br>
 __Professor: W Viles__<br>
 ### implementation
 
-* This project is provided to showcase a method designed for classification, recognition, prediction and approximation.
+* This repository houses three type of models which are used for classification, prediction and approximation tasks.  They are linear regression, logistic regression and multi-layer perceptron.  The pythno scripts import data and process it to produce final parameters,  These parameters could then be used to make predictions with a new set of data inputs.  By running the scripts you will be generating pngs whose output confirms that as these models work through their iterations they are improving in their ability to perform the tasks assigned.  
 
 * To get started, ensure you are in the ds5020_mlp_project directory.
-    1. into the terminal, type 'Make lin_reg', 'Make log_reg' and 'Make mlp'
+    1. into the terminal, type 'make lin_reg', 'make log_reg' and 'make mlp'
     2. a corresponding figure(s) for each model type will generate under the 'figs' tab. Check them out.
         The linear regression figure plots the line of best fit between the height of mothers and their daughters. The line shows a correlation between taller mothers generally having taller daughters, and shorter mothers generally having shorter daughters.
         The logistic regression generates two figures: one for the Newton model and one using gradient descent. They plot the change in vbeta, and demonstrate that in both models vbeta stabilizes. Vbeta stabilizes much more quickly using gradient descent.
