@@ -5,6 +5,11 @@ __Professor: W Viles__<br>
 [An Overview of ANN/MLP: Analyzing Water Potability Data](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
 # Project Topic: Multilayer Perceptron / Neural Network
 
+how to run scripts
+where the output is
+what the output tells us (how it support the idea that these are running correctly)
+
+
 * This project will  demonstrate the implementation of a Multi Layer Perceptron (MLP). 
     1. It consists of an input layer of nodes that receive data.
     2. Hidden layer(s) of nodes that evaluate and specify the relationship between inputs and outputs.

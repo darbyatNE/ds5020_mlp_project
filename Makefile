@@ -1,7 +1,7 @@
 .PHONY: data
-
 lin_reg: 
 	python3 -B src/lin_reg.py
+
 
 log_reg: 
 	python3 -B src/log_reg.py

@@ -2,6 +2,7 @@ import numpy as np  # Line 1: Import NumPy library as np
 from sklearn import datasets  # Line 2: Import datasets module from scikit-learn library
 import matplotlib.pyplot as plt  # Line 3: Import pyplot module from matplotlib library
 from sklearn.preprocessing import StandardScaler  # Line 4: Import StandardScaler class from scikit-learn
+from sklearn import metrics
 
 
 # Load the CSV file into a NumPy array
@@ -18,8 +19,20 @@ for i in range(data.shape[1]):  # Iterate over columns
     col = data[:, i]
     col_mean = column_means[i]
     col[np.isnan(col)] = col_mean
-# Check for missing values
-missing_values = np.isnan(data).sum(axis=0)
+
+
+# Find indices of missing values (NaNs) in the array
+missing_indices = np.isnan(data)
+
+# Sum up the missing values along the rows to identify rows with any missing value
+missing_rows = np.any(missing_indices, axis=1)
+
+# Filter out rows with missing values
+cleaned_data = data[~missing_rows]
+
+# Check for missing values after cleaning
+missing_values_after_cleaning = np.isnan(cleaned_data).sum(axis=0)
+print('# of missing values by characteristic: ', missing_values_after_cleaning)
 
 # feature_columns = ['ph', 'Hardness','Solids','Chloramines','Solids', 'Sulfate', 'Conductivity',
 #                    'Organic_carbon', 'Trihalomethanes', 'Turbidity']  
@@ -41,41 +54,57 @@ print('Checking variance of scaled features (Value should equal 1): ', np.var(X,
 def MLP(y, X, m=10, gam=0.1, T=1e4):  # Line 11: Define MLP function with parameters
     n, p = np.shape(X)  # Line 12: Get number of samples (n) and number of features (p) in X
     beta0 = 0  # Line 13: Initialize bias term beta0
-    vbeta = np.zeros(m)  # Line 14: Initialize weight vector vbeta
+    vbeta = np.random.uniform(-1/np.sqrt(X.shape[1]), 1/np.sqrt(X.shape[1]), size=m) # random weight vector    
     valp0 = np.zeros(m)  # Line 15: Initialize intermediate variable valp0
     A = np.zeros((m, p))  # Line 16: Initialize weight matrix A
+
 
     def phi(z):  # Line 17: Define sigmoid activation function phi
         return 1 / (1 + np.exp(-z))  # Line 18: Sigmoid activation function definition
 
     t = 0  # Line 19: Initialize iteration counter t
     err = np.zeros(int(T))  # Line 20: Initialize array to store errors during training
-    while t < T-1:  # Line 21: Start main training loop
-        t += 1  # Line 22: Increment iteration counter
+    #yhat_arr = np  # Initialize array to store all yhat values
+    yhat_arr = np.empty((0, ))
+    true_y_rnd_arr = np.empty((0, ))
+    while t < T-1:  # Start main training loop
+        t += 1  # Increment iteration counter
         # Sample a random index (data point)
-        ix = np.random.choice(n, 1)  # Line 24: Randomly select a data point index
+        ix = np.random.choice(n, 1)  # Randomly select a data point index
         # Forward part of back propagation
-        vh = phi(valp0 + np.matmul(A, X[ix].flatten()))  # Line 26: Compute hidden layer activations
-        yhat = phi(beta0 + np.dot(vbeta, vh))  # Line 27: Compute output prediction
+        vh = phi(valp0 + np.matmul(A, X[ix].flatten()))  # Compute hidden layer activations
+        yhat = phi(beta0 + np.dot(vbeta, vh))  # Compute output prediction
+
         # Update parameters
-        E = yhat - y[ix]  # Line 29: Compute error
-        beta0 = beta0 - gam * E  # Line 30: Update bias term
-        temp = vbeta * vh * (1 - vh)  # Line 31: Compute temporary variable for weight update
-        vbeta = vbeta - gam * E * vh  # Line 32: Update weight vector
-        valp0 = valp0 - gam * E * temp  # Line 33: Update intermediate variable
-        A = A - gam * E * np.outer(temp, X[ix].flatten())  # Line 34: Update weight matrix
+        E = yhat - y[ix]  # Compute error
+        beta0 = beta0 - gam * E  # Update bias term
+        temp = vbeta * vh * (1 - vh)  # Compute temporary variable for weight update
+        vbeta = vbeta - gam * E * vh  # Update weight vector
+        valp0 = valp0 - gam * E * temp  # Update intermediate variable
+        A = A - gam * E * np.outer(temp, X[ix].flatten())  # Update weight matrix
 
-        # Compute mean error
-        for i in range(n):  # Line 36: Iterate over all data points
-            vh = phi(valp0 + np.matmul(A, X[i]))  # Line 37: Compute hidden layer activations for each data point
-            yhat = phi(beta0 + np.dot(vbeta, vh))  # Line 38: Compute output predictions
-            err[t] += np.sum(np.abs(yhat - y[i]))  # Line 39: Compute absolute error
-        err[t] = err[t] / n  # Line 40: Compute mean error for the iteration
-        # if np.mod(t, 100) == 0:  # Line 41: Plot error curve every 100 iterations
-        # err_plot(0) =err[t] 
-    return beta0, vbeta, valp0, A, err  # Line 44: Return learned parameters after training
+        # Compute mean error and store yhat value
+        for i in range(n):  # Iterate over all data points
+            vh = phi(valp0 + np.matmul(A, X[i]))  # Compute hidden layer activations for each data point
+            yhat = phi(beta0 + np.dot(vbeta, vh))  # Compute output predictions            
+            err[t] += np.sum(np.abs(yhat - y[i]))  # Compute absolute error
+        err[t] = err[t] / n  # Compute mean error for the iteration
+        yhat_arr = np.append(yhat_arr, yhat)  # Append the current yhat value to yhat_arr
+        true_y_rnd_arr = np.append(true_y_rnd_arr, y[ix].flatten())  # Append the current y value to true_y_rnd_arr
+       
+    # Return learned parameters after training
+    return beta0, vbeta, valp0, A, err, yhat_arr, true_y_rnd_arr
 
-beta0, vbeta, valp0, A, err = MLP(y, X, m=10, gam=0.005, T=600)
+# call the MLP function
+beta0, vbeta, valp0, A, err, yhat_arr, true_y_rnd_arr = MLP(y, X, m=10, gam=0.005, T=101)
+
+print('yhat_arr pre dtype: ',yhat_arr.dtype, yhat_arr[:20])
+yhat_arr = 1 * (yhat_arr > 0.50)
+print('yhat_arr post dtype: ',yhat_arr.dtype, yhat_arr[:20])
+print('true_y_rnd_arr dtype: ',true_y_rnd_arr.dtype, true_y_rnd_arr[:20])
+
+print(metrics.confusion_matrix(true_y_rnd_arr, yhat_arr))
+
 # Plot the error curve
 plt.figure(figsize=(8, 6))  # Set the size of the figure
 plt.plot(err[1:])
@@ -86,4 +115,3 @@ plt.tight_layout()  # Adjust layout to prevent clipping of labels
 filename = 'figs/mlp_error_curve.png'
 plt.savefig(filename)  # Save the plot as a PNG file in the fig directory
 print('Plot of the error curve was saved to ', filename)
-
