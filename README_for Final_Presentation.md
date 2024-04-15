@@ -6,6 +6,8 @@ __Professor: W Viles__<br>
 
 [Multilayer Perceptron for Water Potability Prediction - Paper](https://docs.google.com/document/d/1bF4Kb_jRjQWHoXGLLgkLGoO-WSYhhsguDwRlOtZXv1I/edit?usp=sharing)
 
+[MLP Model in Colab Notebook](https://colab.research.google.com/drive/1HILWKScz4AJWYLNfd6l1wLC6mg2ACpj4?usp=sharing)
+
 # Project Topic: Multilayer Perceptron / Neural Network
 
 * This project will  demonstrate the implementation of a Multi Layer Perceptron (MLP). 
