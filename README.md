@@ -4,7 +4,7 @@ __Professor: W Viles__<br>
 ### Semester Project Paper
 [An Overview of ANN/MLP: Analyzing Water Potability Data](https://docs.google.com/document/d/101gRpJYR1gP-H9hRQgJUnVGIw7PT2j6PrdwQfrNMmSM/edit)
 
-[Multilayer Perceptron for Water Potability Prediction - Paper]([https://docs.google.com/document/d/1bF4Kb_jRjQWHoXGLLgkLGoO-WSYhhsguDwRlOtZXv1I/edit?usp=sharing])
+[Multilayer Perceptron for Water Potability Prediction - Paper](https://docs.google.com/document/d/1bF4Kb_jRjQWHoXGLLgkLGoO-WSYhhsguDwRlOtZXv1I/edit?usp=sharing)
 
 # Project Topic: Multilayer Perceptron / Neural Network
 
