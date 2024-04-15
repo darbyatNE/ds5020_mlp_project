@@ -12,11 +12,13 @@ __Professor: W Viles__<br>
 
 * This project is provided to showcase a method designed for classification, recognition, prediction and approximation.
 
-* To get started with regression type "make regression" in the command line
+* To get started clone this repository onto your local network and navigate to the ds5020_mlp_project directory in your terminal.
+
+* type "make mlp" to run the mlp model
 
 * Repo Directories:    
-    - data: contains the data files for the regression/mlp models
-    - src: contains the source code for the regression/mlp models
+    - data: contains the data files for the mlp model
+    - src: contains the source code for the mlp models
 
   
 # Bibliography
